@@ -1,0 +1,114 @@
+#include <stdio.h>
+#include "resid-dmpplayer.h"
+
+ReSIDDmpPlayer::ReSIDDmpPlayer(ReSID *r, ReSIDPbData *d)
+{
+    R = r; 
+    D = d;
+
+    dmp = 0;
+    dmp_len = 0;
+    samples2do = 0; 
+
+    printf("[DMPPl] ReSID dump player initialized\n"); 
+}
+
+ReSIDDmpPlayer::~ReSIDDmpPlayer()
+{
+}
+
+void ReSIDDmpPlayer::setDmp(unsigned char *dump, unsigned int len)
+{
+    dmp = dump;
+    dmp_len = len;
+}
+
+int ReSIDDmpPlayer::set_next_regs()
+{
+    int numregs = 25;
+    if(!dmp || !dmp_len) return 2;
+    if( (dmp_idx + numregs) > dmp_len) return 1;
+
+    R->writeRegs(dmp + dmp_idx, numregs);
+    dmp_idx += numregs;
+
+    return 0;
+}
+
+int ReSIDDmpPlayer::update()
+{
+    if(!D->buf_consumed) return 0;
+    if(fill_audio_buffer()) return 1;
+    D->buf_consumed = 0;
+
+    return 0;
+}
+
+int ReSIDDmpPlayer::fill_audio_buffer()
+{
+
+    int bufpos    = 0;
+    int remainder = 0;
+    int cycles2do = 0;;
+
+    // printf("[DMPPl] -------- fill buffer -------- \n");
+    D->buf_lock = 1;
+
+    while( (bufpos + samples2do) < CFG_AUDIO_BUF_SIZE ) {
+        cycles2do = (R->CYCLES_PER_SAMPLE * samples2do + 0.5);
+        // printf("[DMPPl] frame: %lu, samples2do: %d, cycles2do: %d, ctr: %lu\n", 
+        //        D->stat_framectr, 
+        //        samples2do, cycles2do, D->stat_cnt);
+        R->clock(cycles2do, D->buf + bufpos, CFG_AUDIO_BUF_SIZE);
+        bufpos += samples2do;
+
+        // next frame
+        // printf("[DMPPl] *** next frame ***\n");
+        D->stat_framectr++;
+        samples2do = R->SAMPLES_PER_FRAME;
+        if(set_next_regs()) return 1;
+
+        if(!(D->stat_framectr%10))
+        printf("\r[DMPPl] frame: %lu, buffers played: %lu, underruns: %lu", 
+            D->stat_framectr, 
+            D->stat_cnt,
+            D->stat_buf_underruns
+            );
+        fflush(stdout);
+    }
+
+    remainder = CFG_AUDIO_BUF_SIZE - bufpos;
+    cycles2do = ((double) remainder * R->CYCLES_PER_SAMPLE + 0.5);
+    // printf("[DMPPl] remainder: %d, bufpos: %d, cycles2do: %d\n",
+    //        remainder, bufpos, cycles2do);
+    R->clock(cycles2do, D->buf + bufpos, CFG_AUDIO_BUF_SIZE);
+    samples2do -= remainder;
+    bufpos = 0;
+    
+    // D->buf_lock = 0;
+    return 0;
+}
+
+void ReSIDDmpPlayer::play()
+{
+    if(!dmp || !dmp_len) return;
+    if(set_next_regs()) return; // end reached
+    samples2do = R->SAMPLES_PER_FRAME;
+    fill_audio_buffer();
+    D->buf_lock = 0;
+    D->play = 1;
+}
+
+void ReSIDDmpPlayer::stop()
+{
+    D->play = 0;
+}
+
+void ReSIDDmpPlayer::pause()
+{
+}
+
+void ReSIDDmpPlayer::cont()
+{
+}
+
