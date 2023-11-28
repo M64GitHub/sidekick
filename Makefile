@@ -20,7 +20,7 @@ $(BINARY): sidekick.o sdl-audio.o resid.o resid-dmpplayer.o \
 	resid/pot.o \
 	resid/voice.o \
 	resid/wave.o \
-    resid/wave6581_PST.o \
+	resid/wave6581_PST.o \
 	resid/wave6581_PS_.o \
 	resid/wave6581_P_T.o \
 	resid/wave6581__ST.o \
