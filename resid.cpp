@@ -9,7 +9,7 @@ ReSID::ReSID()
     sid.set_chip_model(MOS6581);
     printf("[ReSID] ReSID chip model: MOS6581\n");
 
-    precalcConstants();
+    precalc_constants();
     printf("[ReSID] ReSID initialized\n");
 }
 
@@ -36,7 +36,7 @@ int ReSID::clock(unsigned int cycles, short *buf, int buflen)
     return sid.clock(delta_t, buf, buflen);
 }
 
-void ReSID::precalcConstants()
+void ReSID::precalc_constants()
 {
     double d1, d2, d3;
 

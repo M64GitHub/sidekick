@@ -19,6 +19,7 @@ void init()
 
 int main(int argc, char **argv)
 {
+    SDL_Event event;
     printf("[MAIN ] sidekick!\n");
     init();
 
@@ -31,7 +32,18 @@ int main(int argc, char **argv)
     while(!DP.update()) {
         SDL_Delay(10); // time to do stuff
         D.buf_lock = 0;
-    } 
+
+        if(SDL_PollEvent(&event)) {
+            switch(event.type) {
+            case SDL_QUIT:
+                printf("\n[MAIN] ctrl-c hit, exitting ...\n");
+                exit(1);
+            break;
+            default:
+            break;
+            }
+        } 
+    }
     
     // --
 

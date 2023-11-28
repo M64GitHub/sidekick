@@ -25,14 +25,14 @@ public:
 
     // dumb audio rendering, not frame aware
     int clock(unsigned int cycles, short *buf, int buflen);
-
+    
     // calculated CONSTANTS
     int SAMPLES_PER_FRAME;
     int CYCLES_PER_FRAME;
     double CYCLES_PER_SAMPLE;
 
 private:
-    void precalcConstants();
+    void precalc_constants();
 
     SID sid;
     unsigned char old_regs[32];
