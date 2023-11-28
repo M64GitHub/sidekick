@@ -36,7 +36,7 @@ int main(int argc, char **argv)
         if(SDL_PollEvent(&event)) {
             switch(event.type) {
             case SDL_QUIT:
-                printf("\n[MAIN] ctrl-c hit, exitting ...\n");
+                printf("\n[MAIN ] ctrl-c hit, exitting ...\n");
                 exit(1);
             break;
             default:
