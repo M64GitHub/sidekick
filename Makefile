@@ -10,7 +10,7 @@ BINARY=sidekick
 CXX=g++
 
 CFLAGS+=-O3 -Wall
-CXXFLAGS=$(CFLAGS)
+CXXFLAGS+=$(CFLAGS)
 
 $(BINARY): sidekick.o sdl-audio.o resid.o resid-dmpplayer.o \
 	resid/sid.o \
