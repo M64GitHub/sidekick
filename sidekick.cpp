@@ -35,8 +35,6 @@ int main(int argc, char **argv)
     
     // --
 
-    printf("\n[MAIN ] callbacks ctr: %lu\n", D.stat_cnt);
-    printf("[MAIN ] sidekick end.\n");
-
+    printf("\n[MAIN ] sidekick end.\n");
     return 0;
 }

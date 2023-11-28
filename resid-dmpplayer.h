@@ -12,6 +12,7 @@ public:
 
     // set sid dump to playback
     void setDmp(unsigned char *dump, unsigned int len);
+    int  loadDmp(unsigned char *filename);
 
     // playback control
     void play(); // always start from beginning
@@ -29,7 +30,7 @@ public:
 
 private:
     int fill_audio_buffer();
-    int  set_next_regs(); // called on each frame by fill_audio_buffer
+    int set_next_regs(); // called on each frame by fill_audio_buffer
 
     ReSID *R;
     ReSIDPbData *D;
