@@ -38,34 +38,34 @@ int ReSID::clock(unsigned int cycles, short *buf, int buflen)
 
 void ReSID::precalcConstants()
 {
-    double d;
+    double d1, d2, d3;
 
     // SAMPLES_PER_FRAME
     //
     // 44.1 kHz =  22.676... us
-    d = ((double) 1000.0) / ((double) CFG_AUDIO_SAMPLING_RATE);
+    d1 = ((double) 1000.0) / ((double) CFG_AUDIO_SAMPLING_RATE);
     // 50 Hz = 20ms. => 20000us / 22.676 us = 882.00144  
-    d = ((double) 20.0) / d;
-    SAMPLES_PER_FRAME = (int) d;
+    d1 = ((double) 20.0) / d1;
+    SAMPLES_PER_FRAME = (int) d1;
     
     // CYCLES_PER_FRAME
     //
     // 50 Hz = 20ms. 1 cycle = 1,015us => 20000 / 1.015
-    d = ((double) 20000.0) / ((double) 1.015) + 0.5;
-    CYCLES_PER_FRAME = (int) d;
+    d2 = ((double) 20000.0) / ((double) 1.015) + 0.5;
+    CYCLES_PER_FRAME = (int) d2;
 
     // CYCLES_PER_SAMPLE
     //
     // 44.1 kHz =  22.676 us
-    d = ((double) 1000000.0) / ((double) CFG_AUDIO_SAMPLING_RATE);
+    d3 = ((double) 1000000.0) / ((double) CFG_AUDIO_SAMPLING_RATE);
     // 1 cycle = 1,015us => 22676 / 1.015
-    d = d / ((double) 1.015);
-    CYCLES_PER_SAMPLE = d;
+    d3 = d3 / ((double) 1.015);
+    CYCLES_PER_SAMPLE = d3;
 
     // prepare dmp shadow regs
     for(int i=0; i<32; i++) { old_regs[i] = 0; }
 
-    printf("[ReSID] samples per frame : %d (%f)\n", SAMPLES_PER_FRAME, d);
-    printf("[ReSID] cycles  per frame : %d (%f)\n", CYCLES_PER_FRAME, d - 0.5);
+    printf("[ReSID] samples per frame : %d (%f)\n", SAMPLES_PER_FRAME, d1);
+    printf("[ReSID] cycles  per frame : %d (%f)\n", CYCLES_PER_FRAME, d2 - 0.5);
     printf("[ReSID] cycles  per sample: %f\n", CYCLES_PER_SAMPLE);
 }
