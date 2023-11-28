@@ -100,13 +100,14 @@ int ReSIDDmpPlayer::fill_audio_buffer()
         samples2do = R->SAMPLES_PER_FRAME;
         if(set_next_regs()) return 1; // end of dmp reached
 
-        if(!(D->stat_framectr%10))
-        printf("\r[DMPPl] frame: %lu, buffers played: %lu, underruns: %lu", 
-            D->stat_framectr, 
-            D->stat_cnt,
-            D->stat_buf_underruns
-            );
-        fflush(stdout);
+        if(!(D->stat_framectr%10)) {
+            printf("\r[DMPPl] frame: %lu, buffers played: %lu, underruns: %lu", 
+                D->stat_framectr, 
+                D->stat_cnt,
+                D->stat_buf_underruns
+                );
+            fflush(stdout);
+        }
     }
 
     remainder = CFG_AUDIO_BUF_SIZE - bufpos;
