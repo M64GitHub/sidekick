@@ -126,5 +126,6 @@ int ReSIDDmpPlayer::fill_audio_buffer()
 
 int ReSIDDmpPlayer::loadDmp(unsigned char *filename)
 {
+
     return 0; 
 }

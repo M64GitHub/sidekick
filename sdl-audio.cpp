@@ -3,10 +3,9 @@
 #include "resid.h"
 
 void audio_callback(void *userdata, uint8_t *stream, int len) {
-    //memset(stream, 0, len);
     ReSIDPbData *D = (ReSIDPbData *) userdata;
 
-    D->stat_cnt++;
+    D->stat_cnt++; 
 
     if(!D->play) return;
 
@@ -23,8 +22,8 @@ void audio_callback(void *userdata, uint8_t *stream, int len) {
 }
 
 int sdl_audio_init(SDL_AudioDeviceID *id, 
-                   SDL_AudioSpec     *spec,
-                   ReSIDPbData       *R)
+                   SDL_AudioSpec     *spec_out,
+                   ReSIDPbData       *D)
 {
     if (SDL_Init(SDL_INIT_AUDIO)) {
         printf("ERROR initializing SDL_AUDIO subsystem: ");
@@ -36,16 +35,16 @@ int sdl_audio_init(SDL_AudioDeviceID *id,
 
     // configure audio device struct
     SDL_AudioSpec spec_in;
-    memset(spec, 0, sizeof(SDL_AudioSpec));
+    memset(spec_out, 0, sizeof(SDL_AudioSpec));
 
     spec_in.freq      = CFG_AUDIO_SAMPLING_RATE;
-    spec_in.format    = AUDIO_S16;       // 8 bit
-    spec_in.channels  = 1;   // mono  / stereo
-    spec_in.samples   = CFG_AUDIO_BUF_SIZE;  // size in samples
-    spec_in.userdata  = R;
+    spec_in.format    = AUDIO_S16; // signed 16bit little endian
+    spec_in.channels  = 1;         // mono / stereo
+    spec_in.samples   = CFG_AUDIO_BUF_SIZE; // size in samples
+    spec_in.userdata  = D;
     spec_in.callback  = audio_callback;
 
-    *id = SDL_OpenAudioDevice(NULL, 0, &spec_in, spec, 0);
+    *id = SDL_OpenAudioDevice(NULL, 0, &spec_in, spec_out, 0);
 
     if (*id < 1) {
         printf("[ERR] initializing audio device: %s", SDL_GetError());
@@ -56,9 +55,9 @@ int sdl_audio_init(SDL_AudioDeviceID *id,
     
     printf("[AUDIO] audio spec: ");
     printf("bufsize_s: %d, bufsize_b: %d, freq: %d\n", 
-           spec->samples,
-           spec->size,
-           spec->freq
+           spec_out->samples,
+           spec_out->size,
+           spec_out->freq
            );
 
     // audio devices default to being paused, so turn off pause

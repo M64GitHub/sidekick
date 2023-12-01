@@ -19,9 +19,6 @@ ReSID::~ReSID()
 
 void ReSID::writeRegs(unsigned char *regs, int len)
 {
-    // SID only has 24 writable registers, SIDDMP does 25
-    if(len > 25) return;
-
     for(int i=0; i<len; i++) {
         if(regs[i] != old_regs[i]) {
             sid.write(i, regs[i]);
