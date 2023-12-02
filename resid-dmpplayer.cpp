@@ -111,9 +111,7 @@ int ReSIDDmpPlayer::fill_audio_buffer()
     samples2do -= remainder;
     bufpos = 0;
    
-    // TODO: explicitly commented out, to include SDL_Delay() in main() for 
-    // easy buffer underrun time measurement (restore on release version):
-    // D->buf_lock = 0;
+    D->buf_lock = 0;
     return 0;
 }
 

@@ -33,7 +33,6 @@ int main(int argc, char **argv)
     int i = 0;
     while(!DP.update()) {
         SDL_Delay(1); // time to do stuff
-        D.buf_lock = 0;
 
         // -- do visual stuff
         if(!(i++%40)) {
