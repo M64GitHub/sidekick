@@ -39,6 +39,8 @@ void ReSIDDmpPlayer::play()
 
     // prepare buffer for first playback
     dmp_idx = 0;
+    D->buf_playing = 0;
+    D->buf_next = D->buf1;
     set_next_regs();
     samples2do = R->SAMPLES_PER_FRAME;
     fill_audio_buffer();
@@ -91,7 +93,7 @@ int ReSIDDmpPlayer::fill_audio_buffer()
         // printf("[DMPPl] frame: %lu, samples2do: %d, cycles2do: %d, ctr: %lu\n", 
         //        D->stat_framectr, 
         //        samples2do, cycles2do, D->stat_cnt);
-        R->clock(cycles2do, D->buf + bufpos, CFG_AUDIO_BUF_SIZE);
+        R->clock(cycles2do, D->buf_next + bufpos, CFG_AUDIO_BUF_SIZE);
         bufpos += samples2do;
 
         // next frame
@@ -114,7 +116,7 @@ int ReSIDDmpPlayer::fill_audio_buffer()
     cycles2do = ((double) remainder * R->CYCLES_PER_SAMPLE + 0.5);
     // printf("[DMPPl] remainder: %d, bufpos: %d, cycles2do: %d\n",
     //        remainder, bufpos, cycles2do);
-    R->clock(cycles2do, D->buf + bufpos, CFG_AUDIO_BUF_SIZE);
+    R->clock(cycles2do, D->buf_next + bufpos, CFG_AUDIO_BUF_SIZE);
     samples2do -= remainder;
     bufpos = 0;
    

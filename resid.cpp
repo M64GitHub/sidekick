@@ -20,9 +20,9 @@ ReSID::~ReSID()
 void ReSID::writeRegs(unsigned char *regs, int len)
 {
     for(int i=0; i<len; i++) {
-        if(regs[i] != old_regs[i]) {
+        if(regs[i] != shadow_regs[i]) {
             sid.write(i, regs[i]);
-            old_regs[i] = regs[i];     
+            shadow_regs[i] = regs[i];     
         }
     }
 }
@@ -59,8 +59,8 @@ void ReSID::precalc_constants()
     d3 = d3 / ((double) 1.015);
     CYCLES_PER_SAMPLE = d3;
 
-    // prepare dmp shadow regs
-    for(int i=0; i<32; i++) { old_regs[i] = 0; }
+    // prepare shadow regs
+    for(int i=0; i<32; i++) { shadow_regs[i] = 0; }
 
     printf("[ReSID] samples per frame : %d (%f)\n", SAMPLES_PER_FRAME, d1);
     printf("[ReSID] cycles  per frame : %d (%f)\n", CYCLES_PER_FRAME, d2 - 0.5);

@@ -5,7 +5,10 @@
 #include "resid/sid.h"
 
 typedef struct S_ReSIDPbData {
-    short buf[CFG_AUDIO_BUF_SIZE+1];
+    short buf1[CFG_AUDIO_BUF_SIZE+1];
+    short buf2[CFG_AUDIO_BUF_SIZE+1];
+    short *buf_playing = 0;
+    short *buf_next = 0;
     char buf_consumed = 0;
     char buf_lock = 0;
     char play = 0;
@@ -35,7 +38,7 @@ private:
     void precalc_constants();
 
     SID sid;
-    unsigned char old_regs[32];
+    unsigned char shadow_regs[32];
 };
 
 #endif

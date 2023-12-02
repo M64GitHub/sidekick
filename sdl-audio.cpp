@@ -15,7 +15,16 @@ void audio_callback(void *userdata, uint8_t *stream, int len) {
     }
 
     // play audio buffer
-    memcpy(stream, (uint8_t *)D->buf, len);
+    memcpy(stream, (uint8_t *)D->buf_next, len);
+
+    // switch buffers
+    if(D->buf_next == D->buf1) {
+        D->buf_next    = D->buf2;
+        D->buf_playing = D->buf1;
+    } else {
+        D->buf_next    = D->buf1;
+        D->buf_playing = D->buf2;
+    }
 
     D->stat_bufwrites++;
     D->buf_consumed = 1;
