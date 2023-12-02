@@ -7,6 +7,12 @@
 class ReSIDVisualizer
 {
 public:
+    ReSIDVisualizer(ReSID *r, ReSIDPbData *d);
+    ~ReSIDVisualizer();
+
+    void visualize();
+
+private:
     ReSID *R;
     ReSIDPbData *D;
 };
