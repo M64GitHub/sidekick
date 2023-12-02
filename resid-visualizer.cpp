@@ -17,28 +17,31 @@ ReSIDVisualizer::~ReSIDVisualizer()
 void ReSIDVisualizer::visualize()
 {
 
-    printf("[MAIN ] frame: %lu, buffers played: %lu, underruns: %lu\n",
+    printf("[RSVIZ] frame: %lu, buffers played: %lu, underruns: %lu\n",
         D->stat_framectr, 
         D->stat_cnt,
         D->stat_buf_underruns
         );
         // 1 WF, PW
-    printf("[MAIN ] osc1-3 wf/pw: %02x/%02x%02x|%02x/%02x%02x|%02x/%02x%02x\n", 
-        R->shadow_regs[0x00],        // WF 1
+    printf("[RSVIZ] OSC 1 WF:%02x|PW:%02x%02x\n",
+        R->shadow_regs[0x04],        // WF 1
         R->shadow_regs[0x03] & 0x0f, // PW 1 HI (4bit)
-        R->shadow_regs[0x02] ,       // PW 1 LO (8bit)
+        R->shadow_regs[0x02]         // PW 1 LO (8bit)
+        );
 
-        // 2 WF, PW
-        R->shadow_regs[0x04],        // WF 2
+    printf("[RSVIZ] OSC 2 WF:%02x|PW:%02x%02x\n",
+        R->shadow_regs[0x0B],        // WF 1
         R->shadow_regs[0x0A] & 0x0f, // PW 1 HI (4bit)
-        R->shadow_regs[0x09] ,       // PW 1 LO (8bit)
+        R->shadow_regs[0x09]         // PW 1 LO (8bit)
+        );
 
-        // 3 WF, PW
-        R->shadow_regs[0x12],        // WF 3
+    printf("[RSVIZ] OSC 3 WF:%02x|PW:%02x%02x\n",
+        R->shadow_regs[0x12],        // WF 1
         R->shadow_regs[0x11] & 0x0f, // PW 1 HI (4bit)
         R->shadow_regs[0x10]         // PW 1 LO (8bit)
         );
-    printf("\x1b[2A");
+
+    printf("\x1b[4A");
     fflush(stdout);
 }
 
