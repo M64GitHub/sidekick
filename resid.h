@@ -34,11 +34,12 @@ public:
     int CYCLES_PER_FRAME;
     double CYCLES_PER_SAMPLE;
 
+    unsigned char shadow_regs[32];
+
 private:
     void precalc_constants();
 
     SID sid;
-    unsigned char shadow_regs[32];
 };
 
 #endif
