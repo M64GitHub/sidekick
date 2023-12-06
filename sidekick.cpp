@@ -6,7 +6,7 @@
 
 //#include "ln2.h"
 // #include "cybernoidII.h"
-#include "m64.h"
+#include "music-club64.h"
 
 SDL_AudioDeviceID   SDL_Audio_DevID;
 SDL_AudioSpec       SDL_Audio_Spec;
