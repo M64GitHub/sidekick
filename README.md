@@ -1,4 +1,5 @@
 # sidekick
+![sidekick_400pct](https://github.com/M64GitHub/sidekick/assets/84202356/d9647fd1-f9c8-4a4e-bdc5-d9caebd62538)
 
 cmdline sid sound effects player
 
