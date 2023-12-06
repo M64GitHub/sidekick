@@ -3,9 +3,8 @@
 #include "resid.h"
 #include "resid-dmpplayer.h"
 #include "resid-visualizer.h"
+#include "sidekick-gfx.h"
 
-// #include "ln2.h"
-// #include "music-club64.h"
 // #include "music-turrican.h"
 #include "music-cybernoidII.h"
 
@@ -33,7 +32,10 @@ int main(int argc, char **argv)
     // DP.setDmp(Cybernoid_II_dmp, Cybernoid_II_dmp_len);
     // DP.setDmp(m64dmp, m64dmp_len);
     DP.setDmp(Cybernoid_II_dmp, Cybernoid_II_dmp_len);
-    
+   
+    // print logo
+    printf("%s", sidekick_unicode);
+
     // -- play sid dmp
     DP.play();
 
