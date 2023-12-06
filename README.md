@@ -7,7 +7,7 @@ Commandline SID sound Effects player
 It also can be used as a nifty modular SID debug or visualisation utility, and for cross platform audio development.  
  - Enhance your shell scripts with audio notification sounds like a SID kick-drum or a nice arpeggio
  - Have a possibility to test your various sound ideas immediately without a Commodore64
- - listen to/test/modify SID-Wizard Instruments quickly, debug hardrestart issues, test sync modes, etc ...
+ - Listen to/test/modify SID-Wizard Instruments quickly, debug hardrestart issues, test sync modes, etc ...
  - Playback and inspect sid tunes, while having a visually rich and detailed information display
 
 Sound effects shall be possible to be specified as text inputs and various file input formats.
