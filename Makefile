@@ -12,7 +12,7 @@ CXX=g++
 CFLAGS+=-O3 -Wall
 CXXFLAGS+=$(CFLAGS)
 
-$(BINARY): sidekick.o sdl-audio.o \
+$(BINARY): main.o sdl-audio.o \
 	resid.o \
 	resid-dmpplayer.o \
 	resid-visualizer.o \
