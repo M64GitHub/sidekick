@@ -32,7 +32,7 @@ For testing purposes:
 
 ### siddmp m64 edition
 
-I have extended the original siddmp utility to output ".dmp" files and "_dmp.h"-files, 
+I have extended the original siddmp utility to output binary ".dmp" files and ascii "_dmp.h"-files, 
 and included it in this repository. This way you can use it to convert .sid files for testing sidekick.
 
 The utility can be found under resources/siddmp and has its own Makefile. You
@@ -55,4 +55,13 @@ or by any siddmp utility for further investigation.
 Especially useful to debug hardrestart usage and instrument timings.
 ```
 
+## Testing sidekick with your own music
 
+ - Convert your sid file using this version of siddmp
+ - copy/move the _dmp.h file into the source tree
+ - in `main.cpp`: `#include` this header file
+ - change the line `DP.setDmp(Cybernoid_II_dmp, Cybernoid_II_dmp_len);` to the contents of your include file
+ - build using `make`
+ - you have your own standalone executable music player!
+
+2023, M64
