@@ -14,6 +14,10 @@ Sound effects shall be possible to be specified as text inputs and various file 
 It shall be possible to specify the SID register values directly as a string input, or use 
 SID-Wizards instrument format and note input as text, or play back dumps of full songs.
 
+`sidekick` is fully written in C++, it is using the SDL audio layer for playback, and reSID for SID chip sound emulation. 
+It also follows a modular approach to easily build your own utilities based upon it, or extend it for based on your needs.
+
+
 ## siddmp m64 edition
 
 I have extended the original siddmp utility to output ".dmp" files and "_dmp.h"-files, 
