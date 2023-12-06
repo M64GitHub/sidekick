@@ -22,7 +22,7 @@ SID-Wizards instrument format and note input as text, or play back dumps of full
 It also follows a modular approach to easily build your own utilities based upon it, or extend it based on your needs.
 
 ## Development status
- - Playback (blocking) of SID dumps is working
+ - Playback (blocking) of SID dumps is working (need to use `&` in your scripts under linux)
  - Basic visualisation of SID chip debug information is working
  - A dump of cybernoid II music is builtin, until parameter handling is ready :) -> standalone test music player
    
