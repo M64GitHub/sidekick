@@ -10,6 +10,9 @@ Commandline SID sound Effects player
  - Playback and inspect sid tunes, while having a visually rich and detailed information display
  - Playback full tunes in (non-blocking) backgrounding mode (unix fork) to use SID sounds in your programs
  - Cut your favorite parts/effects out of any SID music and play them in your own programs
+   
+ - Maintain your collection of sounds in (neo)vim compatible pure ascii files.
+ - .wav output: render your ideas or parts of songs into high quality wave files for your DAW or hardware samplers
 
 Sound effects shall be possible to be specified as text inputs and various file input formats.
 It shall be possible to specify the SID register values directly as a string input, or use 
