@@ -19,6 +19,9 @@ SID-Wizards instrument format and note input as text, or play back dumps of full
 `sidekick` is fully written in C++, it is using the SDL audio layer for playback, and reSID for SID chip sound emulation. 
 It also follows a modular approach to easily build your own utilities based upon it, or extend it for based on your needs.
 
+## Development status
+ - Playback (blocking) of SID dumps is working
+ - Basic visualisation of SID chip debug information is working
 
 ## siddmp m64 edition
 
