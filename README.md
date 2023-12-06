@@ -23,7 +23,9 @@ It also follows a modular approach to easily build your own utilities based upon
  - Playback (blocking) of SID dumps is working
  - Basic visualisation of SID chip debug information is working
 
-## siddmp m64 edition
+For testing purposes:
+
+### siddmp m64 edition
 
 I have extended the original siddmp utility to output ".dmp" files and "_dmp.h"-files, 
 and included it in this repository. This way you can use it to convert .sid files for testing sidekick.
