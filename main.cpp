@@ -4,9 +4,10 @@
 #include "resid-dmpplayer.h"
 #include "resid-visualizer.h"
 
-//#include "ln2.h"
-// #include "cybernoidII.h"
-#include "music-club64.h"
+// #include "ln2.h"
+// #include "music-club64.h"
+// #include "music-turrican.h"
+#include "music-cybernoidII.h"
 
 SDL_AudioDeviceID   SDL_Audio_DevID;
 SDL_AudioSpec       SDL_Audio_Spec;
@@ -30,7 +31,8 @@ int main(int argc, char **argv)
 
     // -- load sid dmp
     // DP.setDmp(Cybernoid_II_dmp, Cybernoid_II_dmp_len);
-    DP.setDmp(m64dmp, m64dmp_len);
+    // DP.setDmp(m64dmp, m64dmp_len);
+    DP.setDmp(Cybernoid_II_dmp, Cybernoid_II_dmp_len);
     
     // -- play sid dmp
     DP.play();
