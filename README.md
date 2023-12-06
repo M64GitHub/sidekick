@@ -10,6 +10,7 @@ It also can be used as a nifty modular SID debug or visualisation utility, and f
  - Listen to/test/modify SID-Wizard Instruments quickly, debug hardrestart issues, test sync modes, etc ...
  - Playback and inspect sid tunes, while having a visually rich and detailed information display
  - Playback full tunes in (non-blocking) backgrounding mode (unix fork) to use SID sounds in your programs
+ - Cut your favorite parts/effects out of any SID music and play them in your own programs
 
 Sound effects shall be possible to be specified as text inputs and various file input formats.
 It shall be possible to specify the SID register values directly as a string input, or use 
