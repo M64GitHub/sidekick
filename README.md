@@ -3,8 +3,7 @@
 
 Commandline SID sound Effects player  
 
-`sidekick` is mainly intended to be a command line SID utility for directly playing back SID sound effects.  
-It also can be used as a nifty modular SID debug or visualisation utility, and for cross platform audio development.  
+`sidekick` is a command line SID utility for directly playing back SID sound effects or full tunes. It also can be used as a nifty modular SID debug or visualisation utility, and for cross platform audio development.  
  - Enhance your shell scripts with audio notification sounds like a SID kick-drum or a nice arpeggio
  - Have a possibility to test your various sound ideas immediately without a Commodore64
  - Listen to/test/modify SID-Wizard Instruments quickly, debug hardrestart issues, test sync modes, etc ...
