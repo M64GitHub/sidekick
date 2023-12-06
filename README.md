@@ -23,7 +23,8 @@ It also follows a modular approach to easily build your own utilities based upon
 
 ## Development status
  - Playback (blocking) of SID dumps is working
- -Basic visualisation of SID chip debug information is working
+ - Basic visualisation of SID chip debug information is working
+   
 ![Selection_128](https://github.com/M64GitHub/sidekick/assets/84202356/8751997d-b15f-43f7-8174-ce53637576b4)
  
 For testing purposes:
