@@ -28,6 +28,8 @@ public:
     // returns 1 on end of dump
     int update();
 
+    short outputs[3];
+
 private:
     int fill_audio_buffer();
     int set_next_regs(); // called on each frame by fill_audio_buffer

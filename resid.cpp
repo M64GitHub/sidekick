@@ -6,8 +6,8 @@ ReSID::ReSID()
     printf("[ReSID] ReSID initializing ...\n");
 
     sid.set_sampling_parameters(985248, SAMPLE_RESAMPLE_INTERPOLATE, 44100);
-    sid.set_chip_model(MOS6581);
-    printf("[ReSID] ReSID chip model: MOS6581\n");
+    sid.set_chip_model(MOS8580);
+    printf("[ReSID] ReSID chip model: MOS8580\n");
 
     precalc_constants();
     printf("[ReSID] ReSID initialized\n");

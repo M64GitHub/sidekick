@@ -5,13 +5,14 @@
 #include "resid-visualizer.h"
 
 //#include "ln2.h"
-#include "cybernoidII.h"
+// #include "cybernoidII.h"
+#include "m64.h"
 
 SDL_AudioDeviceID   SDL_Audio_DevID;
 SDL_AudioSpec       SDL_Audio_Spec;
 
-ReSIDPbData         D;
 ReSID               R;
+ReSIDPbData         D;
 
 ReSIDDmpPlayer      DP(&R, &D);
 ReSIDVisualizer     RV(&R, &D);
@@ -28,17 +29,18 @@ int main(int argc, char **argv)
     init();
 
     // -- load sid dmp
-    DP.setDmp(Cybernoid_II_dmp, Cybernoid_II_dmp_len);
+    // DP.setDmp(Cybernoid_II_dmp, Cybernoid_II_dmp_len);
+    DP.setDmp(m64dmp, m64dmp_len);
     
     // -- play sid dmp
     DP.play();
 
     int i = 0;
     while(!DP.update()) {
-        SDL_Delay(1); // time to do stuff
+        SDL_Delay(5); // time to do stuff
 
         // -- do visual stuff
-        if(!(i++%40)) {
+        if(!(i++%4)) {
             RV.visualize();
         } 
         
