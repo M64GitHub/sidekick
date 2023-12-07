@@ -37,6 +37,12 @@ int main(int argc, char **argv)
     printf("%s", sidekick_unicode);
     printf("\x1b[2A");
     printf("\x1b[?25l");
+    printf("\x1b[38;5;60m");
+    printf(
+        "                                            "
+        "                                   ");
+    printf("2023, M64\n");
+    printf("\x1b[0m");
     
     // -- play sid dmp
     DP.play();
@@ -56,6 +62,7 @@ int main(int argc, char **argv)
             case SDL_QUIT:
                 printf("\n[MAIN ] ctrl-c hit, exitting ...\n");
                 printf("\x1b[?25h");
+                printf("\x1b[0m");
                 exit(1);
             break;
             default:
