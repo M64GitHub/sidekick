@@ -35,7 +35,9 @@ int main(int argc, char **argv)
    
     // print logo
     printf("%s", sidekick_unicode);
-
+    printf("\x1b[2A");
+    printf("\x1b[?25l");
+    
     // -- play sid dmp
     DP.play();
 
@@ -53,6 +55,7 @@ int main(int argc, char **argv)
             switch(event.type) {
             case SDL_QUIT:
                 printf("\n[MAIN ] ctrl-c hit, exitting ...\n");
+                printf("\x1b[?25h");
                 exit(1);
             break;
             default:
