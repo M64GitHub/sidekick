@@ -16,17 +16,16 @@ ReSIDVisualizer::~ReSIDVisualizer()
 
 void ReSIDVisualizer::visualize()
 {
+
+    // -- Visualize oscillators
     printf("\x1b[38;5;60m"); // color
-
     printf("  |OSC| WV/CTL | PULSEWIDTH             |\n");
-
     for(int i=0; i<3; i++) {
         visualizeOsc(i + 1);
     }
 
-    printf("\x1b[38;5;60m"); // color
-    
     // -- MAIN Volume
+    printf("\x1b[38;5;60m"); // color
     printf("  Main Volume: %f\n", 0.0);
 
     printf("  Frame: %lu, Buffers Played: %lu, Underruns: %lu\n",
@@ -35,7 +34,7 @@ void ReSIDVisualizer::visualize()
         D->stat_buf_underruns
         );
 
-    printf("\x1b[6A");
+    printf("\x1b[6A"); // go 6 lines up
     fflush(stdout);
 }
 
@@ -46,8 +45,6 @@ int ReSIDVisualizer::visualizeOsc(int nr)
     int  i;
     char bar16[17];
     bar16[16] = 0;
-    char unicode[8];
-    unicode[0] = 0;
 
     int osc_base = (nr-1) * 7;
     printf("\x1b[38;5;%dm", nr - 1 + 97); 
