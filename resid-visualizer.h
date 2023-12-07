@@ -11,6 +11,7 @@ public:
     ~ReSIDVisualizer();
 
     void visualize();
+    int visualizeOsc(int nr); // returns # of lines
 
 private:
     ReSID *R;

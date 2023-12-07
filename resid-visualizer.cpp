@@ -16,81 +16,66 @@ ReSIDVisualizer::~ReSIDVisualizer()
 
 void ReSIDVisualizer::visualize()
 {
-    int i;
-    char bar16[17];
-    bar16[16] = 0;
+    printf("\x1b[38;5;60m"); // color
 
-    printf("[RSVIZ] frame: %lu, buffers played: %lu, underruns: %lu\n",
+    printf("  |OSC| WV/CTL | PULSEWIDTH             |\n");
+
+    for(int i=0; i<3; i++) {
+        visualizeOsc(i + 1);
+    }
+
+    printf("\x1b[38;5;60m"); // color
+    
+    // -- MAIN Volume
+    printf("  Main Volume: %f\n", 0.0);
+
+    printf("  Frame: %lu, Buffers Played: %lu, Underruns: %lu\n",
         D->stat_framectr, 
         D->stat_cnt,
         D->stat_buf_underruns
         );
 
-    // -- OSC 1 WF, PW
-    printf("[RSVIZ] OSC 1 |WF ");
-    // if(R->shadow_regs[0x04] & 1) printf("*"); else printf(" ");
-    if(R->shadow_regs[0x04] & 8) printf("T"); else printf(" ");
-    if(R->shadow_regs[0x04] & 4) printf("R"); else printf(" ");
-    if(R->shadow_regs[0x04] & 2) printf("S"); else printf(" ");
-    if(R->shadow_regs[0x04] & 1) printf("G"); else printf(" ");
-    printf(" %02x|PW %02x%02x ",
-        R->shadow_regs[0x04],        // WF 1
-        R->shadow_regs[0x03] & 0x0f, // PW 1 HI (4bit)
-        R->shadow_regs[0x02]         // PW 1 LO (8bit)
-        );
-
-    // PW h-bar
-    for(i=0;i<0x10;i++) {
-        if( i < (R->shadow_regs[0x03] & 0x0f) ) bar16[i] = '*'; 
-        else bar16[i] = ' ';
-    }
-    printf("%s|\n", bar16);
-
-    // -- OSC 2 WF, PW
-    printf("[RSVIZ] OSC 2 |WF ");
-    // if(R->shadow_regs[0x0B] & 1) printf("*"); else printf(" ");
-    if(R->shadow_regs[0x0B] & 8) printf("T"); else printf(" ");
-    if(R->shadow_regs[0x0B] & 4) printf("R"); else printf(" ");
-    if(R->shadow_regs[0x0B] & 2) printf("S"); else printf(" ");
-    if(R->shadow_regs[0x0B] & 1) printf("G"); else printf(" ");
-    printf(" %02x|PW %02x%02x ",
-        R->shadow_regs[0x0B],        // WF 2
-        R->shadow_regs[0x0A] & 0x0f, // PW 2 HI (4bit)
-        R->shadow_regs[0x09]         // PW 2 LO (8bit)
-        );
-
-    // PW h-bar
-    for(i=0;i<0x10;i++) {
-        if( i < (R->shadow_regs[0x0A] & 0x0f) ) bar16[i] = '*'; 
-        else bar16[i] = ' ';
-    }
-    printf("%s|\n", bar16);
-
-    // -- OSC 3 WF, PW
-    printf("[RSVIZ] OSC 3 |WF ");
-    // if(R->shadow_regs[0x12] & 1) printf("*"); else printf(" ");
-    if(R->shadow_regs[0x12] & 8) printf("T"); else printf(" ");
-    if(R->shadow_regs[0x12] & 4) printf("R"); else printf(" ");
-    if(R->shadow_regs[0x12] & 2) printf("S"); else printf(" ");
-    if(R->shadow_regs[0x12] & 1) printf("G"); else printf(" ");
-    printf(" %02x|PW %02x%02x ",
-        R->shadow_regs[0x12],        // WF 3
-        R->shadow_regs[0x11] & 0x0f, // PW 3 HI (4bit)
-        R->shadow_regs[0x10]         // PW 3 LO (8bit)
-        );
-
-    // PW h-bar
-    for(i=0;i<0x10;i++) {
-        if( i < (R->shadow_regs[0x11] & 0x0f) ) bar16[i] = '*'; 
-        else bar16[i] = ' ';
-    }
-    printf("%s|\n", bar16);
-
-    // -- MAIN Volume
-    printf("[RSVIZ] Main Volume: %f\n", 0.0);
-
-
-    printf("\x1b[5A");
+    printf("\x1b[6A");
     fflush(stdout);
+}
+
+// nr: 1...3
+// returns: # of lines printed
+int ReSIDVisualizer::visualizeOsc(int nr) 
+{
+    int  i;
+    char bar16[17];
+    bar16[16] = 0;
+    char unicode[8];
+    unicode[0] = 0;
+
+    int osc_base = (nr-1) * 7;
+    printf("\x1b[38;5;%dm", nr - 1 + 97); 
+    // -- OSC CTRL bits, WF, PW
+    printf("  | %d |", nr);
+    if(R->shadow_regs[osc_base + 0x04] & 8) printf("T"); else printf(" ");
+    if(R->shadow_regs[osc_base + 0x04] & 4) printf("R"); else printf(" ");
+    if(R->shadow_regs[osc_base + 0x04] & 2) printf("S"); else printf(" ");
+    if(R->shadow_regs[osc_base + 0x04] & 1) printf("G"); else printf(" ");
+    printf(" %02x | %02x%02x ",
+        R->shadow_regs[osc_base + 0x04],        // WF 1
+        R->shadow_regs[osc_base + 0x03] & 0x0f, // PW 1 HI (4bit)
+        R->shadow_regs[osc_base + 0x02]         // PW 1 LO (8bit)
+        );
+
+    // PW h-bar
+    for(i=0;i<0x10;i++) {
+        if( i < (R->shadow_regs[osc_base + 0x03] & 0x0f) ) bar16[i] = '*'; 
+        else bar16[i] = ' ';
+    }
+    printf("%s", bar16);
+
+    // PW v-bar (8 steps)
+    int v_val = (R->shadow_regs[osc_base + 0x03] & 0x0f) >> 1;
+    // U+2581 + v_val
+    printf("%c%c%c |", 0xe2, 0x96, 0x81 + v_val);
+
+    printf("\n");
+    return 1;
 }
 

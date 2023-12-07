@@ -41,7 +41,7 @@ int main(int argc, char **argv)
     printf(
         "                                            "
         "                                   ");
-    printf("2023, M64\n");
+    printf("2023, M64\r");
     printf("\x1b[0m");
     
     // -- play sid dmp
@@ -60,6 +60,7 @@ int main(int argc, char **argv)
         if(SDL_PollEvent(&event)) {
             switch(event.type) {
             case SDL_QUIT:
+                printf("\x1b[4B");       // 2 lines up
                 printf("\n[MAIN ] ctrl-c hit, exitting ...\n");
                 printf("\x1b[?25h");
                 printf("\x1b[0m");
