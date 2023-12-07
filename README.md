@@ -26,7 +26,7 @@ It also follows a modular approach to easily build your own utilities based upon
  - Basic visualisation of SID chip debug information is working
  - A dump of cybernoid II music is builtin, until parameter handling is ready :) -> standalone test music player
 
-   ![sidekick_400pct2](https://github.com/M64GitHub/sidekick/assets/84202356/affb3f1b-4f21-44c0-b6c5-27e72d6b7b63)
+![sidekick_400pct2](https://github.com/M64GitHub/sidekick/assets/84202356/2d91926c-490a-4c2e-b828-6c9042cd63b8)
 
 For testing purposes:
 
