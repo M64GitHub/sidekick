@@ -25,8 +25,8 @@ It also follows a modular approach to easily build your own utilities based upon
  - Playback (blocking) of SID dumps is working (need to use `&` in your scripts under linux)
  - Basic visualisation of SID chip debug information is working
  - A dump of cybernoid II music is builtin, until parameter handling is ready :) -> standalone test music player
-   
- ![sidekick_400pct2](https://github.com/M64GitHub/sidekick/assets/84202356/cf3ba8d0-cc39-43e6-a398-f51d5add6b4a)
+
+   ![sidekick_400pct2](https://github.com/M64GitHub/sidekick/assets/84202356/affb3f1b-4f21-44c0-b6c5-27e72d6b7b63)
 
 For testing purposes:
 
