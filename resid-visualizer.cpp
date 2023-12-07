@@ -16,6 +16,8 @@ ReSIDVisualizer::~ReSIDVisualizer()
 
 void ReSIDVisualizer::visualize()
 {
+    // -- tests
+
 
     // -- Visualize oscillators
     printf("\x1b[38;5;60m"); // color

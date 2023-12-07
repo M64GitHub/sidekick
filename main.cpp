@@ -29,8 +29,6 @@ int main(int argc, char **argv)
     init();
 
     // -- load sid dmp
-    // DP.setDmp(Cybernoid_II_dmp, Cybernoid_II_dmp_len);
-    // DP.setDmp(m64dmp, m64dmp_len);
     DP.setDmp(Cybernoid_II_dmp, Cybernoid_II_dmp_len);
    
     // print logo
@@ -39,10 +37,10 @@ int main(int argc, char **argv)
     printf("\x1b[?25l");     // cursor off
     printf("\x1b[38;5;60m"); // color
     printf(
-        "                                            "
-        "                                   ");
+        "                                        "
+        "                                       ");
     printf("2023, M64\r");
-    printf("\x1b[0m");
+    printf("\x1b[0m");       // reset all attributes 
     
     // -- play sid dmp
     DP.play();
@@ -60,9 +58,9 @@ int main(int argc, char **argv)
         if(SDL_PollEvent(&event)) {
             switch(event.type) {
             case SDL_QUIT:
-                printf("\x1b[5B");       // 5 lines down
-                printf("\x1b[?25h");
-                printf("\x1b[0m");
+                printf("\x1b[5B");   // 5 lines down
+                printf("\x1b[?25h"); // cursor on
+                printf("\x1b[0m");   // reset all attributes
                 printf("\n[MAIN ] ctrl-c hit, exitting ...\n");
                 exit(1);
             break;
