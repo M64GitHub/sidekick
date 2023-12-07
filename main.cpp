@@ -35,9 +35,9 @@ int main(int argc, char **argv)
    
     // print logo
     printf("%s", sidekick_unicode);
-    printf("\x1b[2A");
-    printf("\x1b[?25l");
-    printf("\x1b[38;5;60m");
+    printf("\x1b[2A");       // 2 lines up
+    printf("\x1b[?25l");     // cursor off
+    printf("\x1b[38;5;60m"); // color
     printf(
         "                                            "
         "                                   ");
@@ -70,6 +70,9 @@ int main(int argc, char **argv)
             }
         }
     }
+
+    printf("\x1b[?25h");  // cursor on
+    printf("\x1b[0m");    // reset all attributes (cursor color)
 
     printf("\n[MAIN ] sidekick end.\n");
     return 0;
