@@ -17,14 +17,31 @@ ReSIDVisualizer::~ReSIDVisualizer()
 void ReSIDVisualizer::visualize()
 {
     // -- tests
-
+     
+    printf("\x1b[9A");       // 5 lines up
+    printf("*\x1b[1D");      // 1 left
+    printf("\x1b[9B");       // 5 lines down
 
     // -- Visualize oscillators
     printf("\x1b[38;5;60m"); // color
-    printf("  |OSC| WV/CTL | PULSEWIDTH             |\n");
+    printf("  |   |        |                        |\n");
+    // printf("  %c%c%c   |        |                        |\n",
+           // 0xe2, 0x96, 0x88);
+    printf("  |OSC| CTL/WF | PULSEWIDTH             |\n");
     for(int i=0; i<3; i++) {
         visualizeOsc(i + 1);
     }
+
+    printf("\x1b[38;5;60m"); // color
+//    printf("\x1b[38;5;59m"); // color
+    printf("  %c%c%c   |        |                        |\n",
+           0xe2, 0x96, 0x80);
+    printf("\x1b[38;5;59m"); // color
+    printf("      %c%c%c        %c%c%c                        %c%c%c\n",
+           0xe2, 0x96, 0x80,
+           0xe2, 0x96, 0x80,
+           0xe2, 0x96, 0x80
+           );
 
     // -- MAIN Volume
     printf("\x1b[38;5;60m"); // color
@@ -36,7 +53,7 @@ void ReSIDVisualizer::visualize()
         D->stat_buf_underruns
         );
 
-    printf("\x1b[6A"); // go 6 lines up
+    printf("\x1b[9A"); // go 6 lines up
     fflush(stdout);
 }
 
