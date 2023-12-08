@@ -11,7 +11,9 @@ public:
     ~ReSIDVisualizer();
 
     void visualize();
-    int visualizeOsc(int nr); // returns # of lines
+    int  visualizeOsc(int nr); // returns # of lines
+
+    int getNote(int freq);
 
 private:
     ReSID *R;
