@@ -37,7 +37,7 @@ void ReSIDVisualizer::visualize()
     printf("\x1b[38;5;59m"); // color
     printf("  |   |        |                        |\n");
     printf("\x1b[38;5;60m"); // color
-    printf("  |OSC| CTL/WF | PULSEWIDTH             | FREQ/Hz\n");
+    printf("  |OSC| CTL/WF | PULSEWIDTH             | FRQReg/Hz\n");
     for(int i=0; i<3; i++) {
         visualizeOsc(i + 1);
     }
@@ -103,14 +103,14 @@ int ReSIDVisualizer::visualizeOsc(int nr)
     // U+2581 + v_val
     printf("%c%c%c | ", 0xe2, 0x96, 0x81 + v_val);
 
-    // double f = ((R->shadow_regs[osc_base+1] << 8) + R->shadow_regs[osc_base]) / 
-    //            1000.0;
-    int f = ((R->shadow_regs[osc_base+1] << 8) + R->shadow_regs[osc_base]);
+    // Frequency
+    double f = ((R->shadow_regs[osc_base+1] << 8) + R->shadow_regs[osc_base]) / 
+                17.02841924;
     printf("%02x%02x ", R->shadow_regs[osc_base+1], R->shadow_regs[osc_base]);
-    if(f < 10000) printf(" ");
     if(f <  1000) printf(" ");
+    if(f <   100) printf(" ");
     printf("%d  ", 
-           f);
+           (int)f);
 
     printf("\n");
     return 1;
