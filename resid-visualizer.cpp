@@ -16,6 +16,8 @@ ReSIDVisualizer::~ReSIDVisualizer()
 
 int ReSIDVisualizer::getNote(int freq)
 {
+    if(freq < 0x0117) return -1;
+
     unsigned char freqtbllo[] = {
       0x17,0x27,0x39,0x4b,0x5f,0x74,0x8a,0xa1,0xba,0xd4,0xf0,0x0e,
       0x2d,0x4e,0x71,0x96,0xbe,0xe8,0x14,0x43,0x74,0xa9,0xe1,0x1c,
@@ -157,17 +159,16 @@ int ReSIDVisualizer::visualizeOsc(int nr)
     printf("%02x%02x ", R->shadow_regs[osc_base+1], R->shadow_regs[osc_base]);
     if(f <  1000) printf(" ");
     if(f <   100) printf(" ");
-    printf("%d  ", 
-           (int)f);
+    printf("%d  ", (int)f);
 
     int n=0;
     // printf("\x1b[38;5;60m"); // color
     printf("\x1b[38;5;%dm", nr - 1 + 127); 
     if((n=getNote((R->shadow_regs[osc_base+1] << 8) + R->shadow_regs[osc_base])) 
-        > 0) {
+        >= 0) {
         printf("%s", notename[n]);
     } else {
-        printf("    ");
+        printf("   ");
     }
 
     printf("\n");
