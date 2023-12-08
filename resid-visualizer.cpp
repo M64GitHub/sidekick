@@ -16,6 +16,18 @@ ReSIDVisualizer::~ReSIDVisualizer()
 
 void ReSIDVisualizer::visualize()
 {
+    if(!D || !D->buf_playing) return;
+
+    char vu_color_str[16];
+    vu_color_str[0] = 0x00;
+
+    // VU-Meter val in v_val, color in vu_color_str
+    short v_val = 0; 
+    for(int i=1; i<CFG_AUDIO_BUF_SIZE; i++) {
+        if(D->buf_playing[i] > v_val) v_val = D->buf_playing[i];
+    }
+    sprintf(vu_color_str, "\x1b[38;5;%dm", 235 + (v_val >> 11));
+
     // -- tests
     printf("\x1b[9A");       // 5 lines up
     printf("*\x1b[1D");      // 1 left
@@ -25,7 +37,7 @@ void ReSIDVisualizer::visualize()
     printf("\x1b[38;5;59m"); // color
     printf("  |   |        |                        |\n");
     printf("\x1b[38;5;60m"); // color
-    printf("  |OSC| CTL/WF | PULSEWIDTH             |\n");
+    printf("  |OSC| CTL/WF | PULSEWIDTH             | FREQ/Hz\n");
     for(int i=0; i<3; i++) {
         visualizeOsc(i + 1);
     }
@@ -41,13 +53,12 @@ void ReSIDVisualizer::visualize()
 
     // -- MAIN Volume
     printf("\x1b[38;5;60m"); // color
-    short v_val = 0; 
-    for(int i=1; i<CFG_AUDIO_BUF_SIZE; i++) {
-        if(D->buf_playing[i] > v_val) v_val = D->buf_playing[i];
-    }
-    v_val = v_val >> 12; 
-    printf("  Main Out: %c%c%c\n", 0xe2, 0x96, 0x81 + v_val);
 
+    printf("  Main Out: %s%c%c%c\n",
+           vu_color_str, 
+           0xe2, 0x96, 0x81 + (v_val >> 12));
+    
+    printf("\x1b[38;5;60m"); // color
     printf("  Frame: %lu, Buffers Played: %lu, Underruns: %lu\n",
         D->stat_framectr, 
         D->stat_cnt,
@@ -90,7 +101,16 @@ int ReSIDVisualizer::visualizeOsc(int nr)
     // PW v-bar (8 steps)
     int v_val = (R->shadow_regs[osc_base + 0x03] & 0x0f) >> 1;
     // U+2581 + v_val
-    printf("%c%c%c |", 0xe2, 0x96, 0x81 + v_val);
+    printf("%c%c%c | ", 0xe2, 0x96, 0x81 + v_val);
+
+    // double f = ((R->shadow_regs[osc_base+1] << 8) + R->shadow_regs[osc_base]) / 
+    //            1000.0;
+    int f = ((R->shadow_regs[osc_base+1] << 8) + R->shadow_regs[osc_base]);
+    printf("%02x%02x ", R->shadow_regs[osc_base+1], R->shadow_regs[osc_base]);
+    if(f < 10000) printf(" ");
+    if(f <  1000) printf(" ");
+    printf("%d  ", 
+           f);
 
     printf("\n");
     return 1;
