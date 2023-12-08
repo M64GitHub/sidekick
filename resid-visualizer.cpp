@@ -17,23 +17,19 @@ ReSIDVisualizer::~ReSIDVisualizer()
 void ReSIDVisualizer::visualize()
 {
     // -- tests
-     
     printf("\x1b[9A");       // 5 lines up
     printf("*\x1b[1D");      // 1 left
     printf("\x1b[9B");       // 5 lines down
 
     // -- Visualize oscillators
-    printf("\x1b[38;5;60m"); // color
+    printf("\x1b[38;5;59m"); // color
     printf("  |   |        |                        |\n");
-    // printf("  %c%c%c   |        |                        |\n",
-           // 0xe2, 0x96, 0x88);
+    printf("\x1b[38;5;60m"); // color
     printf("  |OSC| CTL/WF | PULSEWIDTH             |\n");
     for(int i=0; i<3; i++) {
         visualizeOsc(i + 1);
     }
-
     printf("\x1b[38;5;60m"); // color
-//    printf("\x1b[38;5;59m"); // color
     printf("  %c%c%c   |        |                        |\n",
            0xe2, 0x96, 0x80);
     printf("\x1b[38;5;59m"); // color
@@ -45,7 +41,12 @@ void ReSIDVisualizer::visualize()
 
     // -- MAIN Volume
     printf("\x1b[38;5;60m"); // color
-    printf("  Main Volume: %f\n", 0.0);
+    short v_val = 0; 
+    for(int i=1; i<CFG_AUDIO_BUF_SIZE; i++) {
+        if(D->buf_playing[i] > v_val) v_val = D->buf_playing[i];
+    }
+    v_val = v_val >> 12; 
+    printf("  Main Out: %c%c%c\n", 0xe2, 0x96, 0x81 + v_val);
 
     printf("  Frame: %lu, Buffers Played: %lu, Underruns: %lu\n",
         D->stat_framectr, 

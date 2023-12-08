@@ -5,7 +5,7 @@
 #include "resid-visualizer.h"
 #include "sidekick-logo.h"
 
-// #include "music-turrican.h"
+#include "music-turrican.h"
 #include "music-cybernoidII.h"
 
 SDL_AudioDeviceID   SDL_Audio_DevID;
@@ -29,8 +29,8 @@ int main(int argc, char **argv)
     init();
 
     // -- load sid dmp
-    DP.setDmp(Cybernoid_II_dmp, Cybernoid_II_dmp_len);
-    // DP.setDmp(turrican_dmp, turrican_dmp_len);
+    // DP.setDmp(Cybernoid_II_dmp, Cybernoid_II_dmp_len);
+    DP.setDmp(turrican_dmp, turrican_dmp_len);
    
     // print logo
     printf("%s", sidekick_unicode);
