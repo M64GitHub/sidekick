@@ -22,7 +22,7 @@ It also follows a modular approach to easily build your own utilities based upon
 
 ## Development status
  - Playback (blocking) of SID dumps is working (need to use `&` in your scripts under linux)
- - Basic visualisation of SID chip debug information is working:
+ - Basic realtime visualisation of SID chip debug information is working:
    - per oscillator:
      - CTL: decoded control register bits (test, ringmod, sync, gate)
      - WV: full control register including waveform
