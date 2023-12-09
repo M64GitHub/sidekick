@@ -21,7 +21,7 @@ SID-Wizards instrument format and note input as text, or play back dumps of full
 It also follows a modular approach to easily build your own utilities based upon it, or extend it based on your needs.
 
 ## Development status
- - Playback (blocking) of SID dumps is working (need to use `&` in your scripts under linux)
+ - Playback (terminal blocking) of SID dumps is working
  - Basic realtime visualisation of SID chip debug information is working:
    - per oscillator:
      - CTL: decoded control register bits (test, ringmod, sync, gate)
