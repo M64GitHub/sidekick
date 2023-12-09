@@ -98,7 +98,7 @@ void ReSIDVisualizer::visualize()
            vu_color_str, 
            0xe2, 0x96, 0x81 + (v_val >> 12));
     
-    printf("\x1b[38;5;60m"); // color
+    printf("\x1b[38;5;238m"); // color
     printf("  Frame: %lu, Buffers Played: %lu, Underruns: %lu\n",
         D->stat_framectr, 
         D->stat_cnt,
