@@ -22,7 +22,14 @@ It also follows a modular approach to easily build your own utilities based upon
 
 ## Development status
  - Playback (blocking) of SID dumps is working (need to use `&` in your scripts under linux)
- - Basic visualisation of SID chip debug information is working
+ - Basic visualisation of SID chip debug information is working:
+   - per oscillator:
+    - CTL: decoded control register bits (test, ringmod, sync, gate)
+    - WV: full control register including waveform
+    - pulsewidth, animated
+    - frequency registers, decoded frequency in Hz and decoding to nearest note value
+   - VU-meter of main out (mono), animated very small atm
+   - Playback statistics - # of frames, buffers played, buffer underruns
  - A dump of cybernoid II music is builtin, until parameter handling is ready :) -> standalone test music player
 
 ![sidekick_400pct2](https://github.com/M64GitHub/sidekick/assets/84202356/4dbe95e7-6185-4245-9c69-4d633dfd78f1)
