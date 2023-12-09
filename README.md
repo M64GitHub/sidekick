@@ -24,10 +24,10 @@ It also follows a modular approach to easily build your own utilities based upon
  - Playback (blocking) of SID dumps is working (need to use `&` in your scripts under linux)
  - Basic visualisation of SID chip debug information is working:
    - per oscillator:
-    - CTL: decoded control register bits (test, ringmod, sync, gate)
-    - WV: full control register including waveform
-    - pulsewidth, animated
-    - frequency registers, decoded frequency in Hz and decoding to nearest note value
+     - CTL: decoded control register bits (test, ringmod, sync, gate)
+     - WV: full control register including waveform
+     - pulsewidth, animated
+     - frequency registers, decoded frequency in Hz, and decoding to nearest note value
    - VU-meter of main out (mono), animated very small atm
    - Playback statistics - # of frames, buffers played, buffer underruns
  - A dump of cybernoid II music is builtin, until parameter handling is ready :) -> standalone test music player
