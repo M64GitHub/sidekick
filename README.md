@@ -37,7 +37,7 @@ It also follows a modular approach to easily build your own utilities based upon
 
 For testing purposes:
 
-### siddmp m64 edition
+### siddmp adaption
 
 I have extended the original siddmp utility to output binary ".dmp" files and ascii "_dmp.h"-files, 
 and included it in this repository. This way you can use it to convert .sid files for testing sidekick.
